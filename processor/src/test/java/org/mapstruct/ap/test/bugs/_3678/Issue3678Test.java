@@ -47,4 +47,12 @@ public class Issue3678Test {
             );
     }
 
+    @ProcessorTest
+    void afterMappingOverloadOnlyChildCalled() {
+        Issue3678Mapper.MappingContext mappingContext = new Issue3678Mapper.MappingContext();
+        Issue3678Mapper.Child child = new Issue3678Mapper.Child("");
+        Issue3678Mapper.ChildDto childDto = Issue3678Mapper.INSTANCE.mapChild(child);
+        assertThat( childDto.getValue() ).isEqualTo( "Child" );
+    }
+
 }

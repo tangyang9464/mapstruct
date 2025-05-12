@@ -13,6 +13,7 @@ import org.mapstruct.BeforeMapping;
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
@@ -49,6 +50,16 @@ public interface Issue3678Mapper {
         @AfterMapping
         public void afterMappingSourceB(SourceB sourceB) {
             invokedMethods.add( "afterMappingSourceB" );
+        }
+
+        @AfterMapping
+        public void afterMappingParent(Parent parent) {
+            invokedMethods.add( "afterMappingParent" );
+        }
+
+        @AfterMapping
+        public void afterMappingChild(Child child) {
+            invokedMethods.add( "afterMappingChild" );
         }
 
         public List<String> getInvokedMethods() {
@@ -122,6 +133,48 @@ public interface Issue3678Mapper {
             public Target build() {
                 return new Target( this.name, this.description );
             }
+        }
+    }
+
+    ParentDto map(Parent sourceA);
+
+    ChildDto mapChild(Parent sourceA);
+
+    @AfterMapping
+    default void afterMapping(Parent sourceA, @MappingTarget ParentDto target) {
+        target.setValue(target.getValue() +"Parent");
+    }
+
+    @AfterMapping
+    default void afterMapping(Parent sourceA, @MappingTarget ChildDto target) {
+        target.setValue(target.getValue() +"Child");
+    }
+
+    class Parent {
+        private String value;
+        public Parent(String value) { this.value = value; }
+        public String getValue() { return value; }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+    }
+    class Child extends Parent {
+        public Child(String value) { super(value); }
+    }
+
+    class ParentDto {
+        private String value;
+        public ParentDto(String value) { this.value = value; }
+        public String getValue() { return value; }
+        public void setValue(String value) {
+            this.value = value;
+        }
+    }
+    class ChildDto extends ParentDto {
+        public ChildDto(String value) { super(value); }
+        public void setValue(String value) {
+            super.setValue(value);
         }
     }
 
