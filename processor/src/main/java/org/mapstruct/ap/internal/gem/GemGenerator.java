@@ -28,6 +28,7 @@ import org.mapstruct.MapperConfig;
 import org.mapstruct.Mapping;
 import org.mapstruct.Ignored;
 import org.mapstruct.IgnoredList;
+import org.mapstruct.MappingSource;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 import org.mapstruct.Named;
@@ -83,6 +84,7 @@ import org.mapstruct.tools.gem.GemDefinition;
 @GemDefinition(Builder.class)
 @GemDefinition(Condition.class)
 @GemDefinition(Javadoc.class)
+@GemDefinition(MappingSource.class)
 
 @GemDefinition(MappingControl.class)
 @GemDefinition(MappingControls.class)
