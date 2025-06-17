@@ -51,17 +51,17 @@ public class Parameter extends ModelElement {
         this.mappingContext = ContextGem.instanceOn( element ) != null;
         this.sourcePropertyName = SourcePropertyNameGem.instanceOn( element ) != null;
         this.targetPropertyName = TargetPropertyNameGem.instanceOn( element ) != null;
-        
+
         // Handle MappingSource annotation
         MappingSourceGem mappingSourceGem = MappingSourceGem.instanceOn( element );
         this.mappingSource = mappingSourceGem != null;
         this.implicitMapping = this.mappingSource && mappingSourceGem.implicitMapping().get();
-        
+
         this.varArgs = varArgs;
     }
 
     private Parameter(String name, Type type, boolean mappingTarget, boolean targetType, boolean mappingContext,
-                      boolean sourcePropertyName, boolean targetPropertyName, boolean mappingSource, 
+                      boolean sourcePropertyName, boolean targetPropertyName, boolean mappingSource,
                       boolean implicitMapping, boolean varArgs) {
         this.element = null;
         this.name = name;
@@ -117,7 +117,7 @@ public class Parameter extends ModelElement {
             + ( sourcePropertyName ? "@SourcePropertyName " : "" )
             + ( targetPropertyName ? "@TargetPropertyName " : "" )
             + ( mappingSource ? "@MappingSource " : "" )
-            +  "%s " + name;
+            + "%s " + name;
     }
 
     @Override
@@ -140,11 +140,11 @@ public class Parameter extends ModelElement {
     public boolean isSourcePropertyName() {
         return sourcePropertyName;
     }
-    
+
     public boolean isMappingSource() {
         return mappingSource;
     }
-    
+
     public boolean isImplicitMapping() {
         return implicitMapping;
     }
@@ -218,16 +218,16 @@ public class Parameter extends ModelElement {
     }
 
     /**
-     * @param parameters the parameters to scan
+     * @param parameters          the parameters to scan
      * @param sourceParameterName the source parameter name to match
      * @return the parameters from the given list that are considered 'source parameters'
      */
     public static Parameter getSourceParameter(List<Parameter> parameters, String sourceParameterName) {
         return parameters.stream()
-                         .filter( Parameter::isSourceParameter )
-                         .filter( parameter -> parameter.getName().equals( sourceParameterName ) )
-                         .findAny()
-                         .orElse( null );
+            .filter( Parameter::isSourceParameter )
+            .filter( parameter -> parameter.getName().equals( sourceParameterName ) )
+            .findAny()
+            .orElse( null );
     }
 
     /**
@@ -251,7 +251,7 @@ public class Parameter extends ModelElement {
     }
 
     public static Parameter getTargetPropertyNameParameter(List<Parameter> parameters) {
-      return parameters.stream().filter( Parameter::isTargetPropertyName ).findAny().orElse( null );
+        return parameters.stream().filter( Parameter::isTargetPropertyName ).findAny().orElse( null );
     }
 
 }

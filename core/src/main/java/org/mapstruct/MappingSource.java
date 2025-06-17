@@ -32,12 +32,13 @@ import java.lang.annotation.Target;
  *     {@literal @}Mapping(target = "name", source = "otherSource.name")
  *     TargetDto map({@literal @}MappingSource(implicitMapping = false) UserEntity user, OtherSource otherSource);
  * }
- * 
+ *
  * // Example: Enabling Map entries for implicit mapping in multi-source scenarios
  * {@literal @}Mapper
  * public interface MultiSourceMapper {
  *     {@literal @}Mapping(target = "id", source = "entity.id")
- *     TargetDto map({@literal @}MappingSource(implicitMapping = true) Map&lt;String, Object&gt; sourceMap, Entity entity);
+ *     TargetDto map({@literal @}MappingSource(implicitMapping = true) Map&lt;
+ *     String, Object&gt; sourceMap, Entity entity);
  * }
  * </code></pre>
  *
@@ -46,26 +47,26 @@ import java.lang.annotation.Target;
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.CLASS)
 public @interface MappingSource {
-    
+
     /**
      * Controls whether this parameter participates in implicit mapping.
      * The effect depends on the parameter type:
-     * 
+     * <p>
      * - For Bean parameters:
-     *   true (default): Properties are automatically used for implicit mapping
-     *   false: Properties are not automatically used for implicit mapping
-     *   
+     * true (default): Properties are automatically used for implicit mapping
+     * false: Properties are not automatically used for implicit mapping
+     * <p>
      * - For Map parameters (in multi-source scenarios):
-     *   true: Map entries are used for implicit mapping (similar to single-source behavior)
-     *   false (default): Map entries are not automatically used for implicit mapping
-     *   
+     * true: Map entries are used for implicit mapping (similar to single-source behavior)
+     * false (default): Map entries are not automatically used for implicit mapping
+     * <p>
      * - For other types (Collection, Path, etc.):
-     *   This setting has no effect as these types are never automatically expanded
-     *   
+     * This setting has no effect as these types are never automatically expanded
+     * <p>
      * Note: This setting only affects implicit mapping. Explicit mappings defined with
      * {@literal @}Mapping annotations are always processed regardless of this setting.
-     * 
+     *
      * @return whether implicit mapping should be enabled for this parameter
      */
     boolean implicitMapping() default true;
-} 
+}

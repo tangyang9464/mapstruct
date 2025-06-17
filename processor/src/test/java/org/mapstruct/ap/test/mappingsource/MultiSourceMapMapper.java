@@ -25,7 +25,8 @@ public interface MultiSourceMapMapper {
      */
     MapTarget mapWithImplicitMap(@MappingSource Map<String, String> mapSource, OtherSource otherSource);
 
-    BeanTarget mapWithImplicitBean(@MappingSource(implicitMapping = false) BeanSource beanSource, OtherSource otherSource);
+    BeanTarget mapWithImplicitBean(@MappingSource(implicitMapping = false) BeanSource beanSource,
+                                   OtherSource otherSource);
 
     class MapTarget {
         private String mapId;
@@ -101,4 +102,4 @@ public interface MultiSourceMapMapper {
             return id;
         }
     }
-} 
+}

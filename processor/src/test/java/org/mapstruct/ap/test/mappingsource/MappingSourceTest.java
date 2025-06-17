@@ -21,25 +21,28 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MappingSourceTest {
 
     @ProcessorTest
-    @WithClasses( MultiSourceMapMapper.class )
+    @WithClasses(MultiSourceMapMapper.class)
     public void testMultiSourceWithImplicitMapping() {
         Map<String, String> mapSource = new HashMap<>();
-        mapSource.put("mapId", "1");
-        mapSource.put("mapName", "MapTest");
-        
+        mapSource.put( "mapId", "1" );
+        mapSource.put( "mapName", "MapTest" );
+
         MultiSourceMapMapper.BeanSource beanSource = new MultiSourceMapMapper.BeanSource();
-        beanSource.setBeanId(2);
-        beanSource.setBeanName("BeanTest");
+        beanSource.setBeanId( 2 );
+        beanSource.setBeanName( "BeanTest" );
 
-        MultiSourceMapMapper.MapTarget mapTarget = MultiSourceMapMapper.INSTANCE.mapWithImplicitMap(mapSource, null);
+        MultiSourceMapMapper.MapTarget mapTarget = MultiSourceMapMapper.INSTANCE.mapWithImplicitMap( mapSource, null );
 
-        assertThat(mapTarget).isNotNull();
-        assertThat(mapTarget.getMapId()).isEqualTo("1");
-        assertThat(mapTarget.getMapName()).isEqualTo("MapTest");
+        assertThat( mapTarget ).isNotNull();
+        assertThat( mapTarget.getMapId() ).isEqualTo( "1" );
+        assertThat( mapTarget.getMapName() ).isEqualTo( "MapTest" );
 
-        MultiSourceMapMapper.BeanTarget beanTarget = MultiSourceMapMapper.INSTANCE.mapWithImplicitBean(beanSource, null);
-        assertThat(beanTarget).isNotNull();
-        assertThat(beanTarget.getBeanId()).isNull();
-        assertThat(beanTarget.getBeanName()).isNull();
+        MultiSourceMapMapper.BeanTarget beanTarget = MultiSourceMapMapper.INSTANCE.mapWithImplicitBean(
+            beanSource,
+            null
+        );
+        assertThat( beanTarget ).isNotNull();
+        assertThat( beanTarget.getBeanId() ).isNull();
+        assertThat( beanTarget.getBeanName() ).isNull();
     }
-} 
+}
